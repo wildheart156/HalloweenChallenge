@@ -7,18 +7,44 @@
     --ghost-white: #f6f2f8;
     --candle-glow: #ffd60a;
 }
-
-/* Reduced Motion Preferences */
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-    }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
+
+body {
+    background: var(--spider-black);
+    color: var(--ghost-white);
+    font-family: "Poppins", sans-serif;
+}
+
+header {
+    text-align: center;
+    padding: 25px;
+    background: var(--candy-purple);
+}
+
+h1 {
+    font-family: "Creepster", cursive;
+    color: var(--pumpkin);
+    font-size: 3rem;
+}
+
+header p {
+    margin-top: 5px;
+}
+
+
+
+
 
 /* CSS-only scene switching; wrap scenes in .scenes */
 .scene {
-    display: none;
+    position: relative;
+    height: 550px;
+    overflow: hidden;
+    background: linear-gradient(#08051c, #24113b);
 }
 
 .scenes:not(:has(.scene:target)) .scene:first-child {
@@ -28,6 +54,34 @@
 .scene:target {
     display: block;
 }
+
+.witch {
+    position: absolute;
+    top: 180px;
+    left: -250px;
+    animation: fly 10s linear infinite;
+}
+
+.witch img {
+    width: 220px;
+    filter: drop-shadow(0 0 8px var(--candle-glow));
+}
+
+/* Witch flies across the screen */
+@keyframes fly {
+    0% {
+        transform: translateX(-250px) rotate(-3deg);
+    }
+
+    50% {
+        transform: translateX(50vw) translateY(-30px) rotate(3deg);
+    }
+
+    100% {
+        transform: translateX(110vw) rotate(-3deg);
+    }
+}
+
 
 /* Glowing jack-o'-lantern flicker */
 @keyframes flicker {
@@ -55,5 +109,13 @@
 
     to {
         transform: translateX(100%);
+    }
+}
+
+/* Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
     }
 }
