@@ -1,12 +1,12 @@
-/* Halloween Color Palette & Variables */
+/* Halloween Color Palette */
 :root {
     --pumpkin: #ff7518;
     --candy-purple: #5a189a;
     --spider-black: #1a1423;
-    --slime-green: #8ac926;
     --ghost-white: #f6f2f8;
     --candle-glow: #ffd60a;
 }
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -26,7 +26,6 @@ header {
 }
 
 h1 {
-    font-family: "Creepster", cursive;
     color: var(--pumpkin);
     font-size: 3rem;
 }
@@ -35,11 +34,7 @@ header p {
     margin-top: 5px;
 }
 
-
-
-
-
-/* CSS-only scene switching; wrap scenes in .scenes */
+/* Main scene */
 .scene {
     position: relative;
     height: 550px;
@@ -47,19 +42,76 @@ header p {
     background: linear-gradient(#08051c, #24113b);
 }
 
-.scenes:not(:has(.scene:target)) .scene:first-child {
-    display: block;
+/* Moon */
+.moon {
+    position: absolute;
+    width: 105px;
+    height: 105px;
+    top: 45px;
+    right: 100px;
+    background: #fff3b0;
+    border-radius: 50%;
+    box-shadow: 0 0 15px #fff3b0, 0 0 35px #ffd60a;
+    z-index: 2;
 }
 
-.scene:target {
-    display: block;
+/* Clouds */
+.cloud {
+    position: absolute;
+    width: 130px;
+    height: 40px;
+    border-radius: 50px;
+    background: rgba(246, 242, 248, 0.15);
+    animation: clouds 25s linear infinite;
 }
 
+.cloud-one {
+    top: 100px;
+    left: -150px;
+}
+
+.cloud-two {
+    top: 180px;
+    left: -300px;
+    animation-delay: -10s;
+}
+
+@keyframes clouds {
+    from {
+        transform: translateX(-100px);
+    }
+
+    to {
+        transform: translateX(110vw);
+    }
+}
+
+/* Flying owl */
+.owl {
+    position: absolute;
+    top: 120px;
+    left: -50px;
+    font-size: 40px;
+    animation: owl-fly 12s linear infinite;
+}
+
+@keyframes owl-fly {
+    from {
+        transform: translateX(-50px);
+    }
+
+    to {
+        transform: translateX(110vw);
+    }
+}
+
+/* Witch */
 .witch {
     position: absolute;
     top: 180px;
     left: -250px;
     animation: fly 10s linear infinite;
+    z-index: 3;
 }
 
 .witch img {
@@ -67,7 +119,6 @@ header p {
     filter: drop-shadow(0 0 8px var(--candle-glow));
 }
 
-/* Witch flies across the screen */
 @keyframes fly {
     0% {
         transform: translateX(-250px) rotate(-3deg);
@@ -80,9 +131,9 @@ header p {
     100% {
         transform: translateX(110vw) rotate(-3deg);
     }
-
-/* added sparks for witch */
 }
+
+/* Broomstick sparks */
 .spark {
     position: absolute;
     color: var(--candle-glow);
@@ -122,66 +173,104 @@ header p {
     }
 }
 
-/* Glowing jack-o'-lantern flicker */
-@keyframes flicker {
+/* Trees */
+.trees {
+    position: absolute;
+    bottom: 55px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+}
 
-    0%,
-    100% {
+.trees span {
+    font-size: 65px;
+    display: inline-block;
+    filter: drop-shadow(0 0 5px #08051c);
+    animation: tree-sway 3s ease-in-out infinite;
+}
+
+.trees span:nth-child(2) {
+    font-size: 85px;
+    animation-delay: .5s;
+}
+
+.trees span:nth-child(3) {
+    font-size: 55px;
+    animation-delay: 1s;
+}
+
+.trees span:nth-child(4) {
+    font-size: 75px;
+    animation-delay: 1.5s;
+}
+
+@keyframes tree-sway {
+    0%, 100% {
+        transform: rotate(-1deg);
+    }
+
+    50% {
+        transform: rotate(1deg);
+    }
+}
+
+/* Ground */
+.ground {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+    background: #15102a;
+}
+
+/* Tombstone */
+.grave {
+    position: absolute;
+    bottom: 10px;
+    left: 20%;
+    width: 55px;
+    height: 65px;
+    padding-top: 22px;
+    text-align: center;
+    background: #777080;
+    border-radius: 28px 28px 5px 5px;
+    color: #24113b;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 0 8px #08051c;
+}
+
+/* Pumpkin */
+.pumpkin {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    font-size: 35px;
+    animation: flicker 2.5s ease-in-out infinite;
+}
+
+@keyframes flicker {
+    0%, 100% {
         opacity: 1;
         filter: drop-shadow(0 0 12px var(--pumpkin));
     }
 
     50% {
-        opacity: 0.75;
+        opacity: .75;
     }
 }
 
-.pumpkin-glow {
-    animation: flicker 2.5s ease-in-out infinite;
-}
-
-.cloud {
+/* Cat */
+.cat {
     position: absolute;
-    width: 130px;
-    height: 40px;
-    border-radius: 50px;
-    background: rgba(246, 242, 248, 0.15);
-    animation: clouds 25s linear infinite;
+    bottom: 10px;
+    right: 20%;
+    font-size: 35px;
 }
 
-.cloud-one {
-    top: 100px;
-    left: -150px;
-}
-
-.cloud-two {
-    top: 180px;
-    left: -300px;
-    animation-delay: -10s;
-}
-
-@keyframes clouds {
-    from {
-        transform: translateX(-100px);
-    }
-
-    to {
-        transform: translateX(110vw);
-    }
-}
-
-/* Fog drift */
-@keyframes drift {
-    from {
-        transform: translateX(-100%);
-    }
-
-    to {
-        transform: translateX(100%);
-    }
-}
-
-/* Reduced Motion Preferences */
+/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
     * {
         animation-duration: 0.01ms !important;
